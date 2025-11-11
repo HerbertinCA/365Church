@@ -6,169 +6,74 @@
     <title>Condo Board Financial Report - 2018-2026</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root{
+            --bg-gradient: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+            --accent: #667eea;
+            --muted: #f8f9fa;
+            --text: #333;
+            --card-border: rgba(0,0,0,0.06);
+            --gap: clamp(12px,2vw,30px);
         }
-        
-        body {
+
+        /* Reset */
+        *{box-sizing:border-box;margin:0;padding:0}
+
+        body{
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            background: var(--bg-gradient);
+            min-height:100vh;
+            padding:clamp(12px,3vw,28px);
+            color:var(--text);
         }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
+
+        .container{
+            max-width:1200px;
+            margin:0 auto;
+            background:#fff;
+            border-radius:12px;
+            box-shadow:0 12px 40px rgba(0,0,0,0.18);
+            overflow:hidden;
         }
-        
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
+
+        .header{
+            background:var(--bg-gradient);
+            color:#fff;
+            padding:clamp(18px,4vw,36px);
+            text-align:center;
         }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-        
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            padding: 30px;
-        }
-        
-        .chart-container.full-width {
-            grid-column: 2;
-        }
-        
-        @media (max-width: 1200px) {
-            .charts-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .chart-container.full-width {
-                grid-column: 1 / -1;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .chart-container.full-width {
-                grid-column: 1;
-            }
-        }
-        
-        .chart-container {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .chart-title {
-            font-size: 1.0em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        canvas {
-            display: block;
-            max-height: 300px;
-        }
-        
-        .summary-section {
-            background: #f8f9fa;
-            padding: 30px;
-            border-top: 1px solid #ddd;
-        }
-        
-        .summary-section h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-        }
-        
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        
-        @media (max-width: 1024px) {
-            .summary-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .summary-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .summary-card {
-            background: white;
-            border-left: 4px solid #667eea;
-            padding: 15px;
-            border-radius: 4px;
-        }
-        
-        .summary-card h3 {
-            color: #667eea;
-            font-size: 0.9em;
-            font-weight: 600;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .summary-card .value {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #333;
-        }
-        
-        .summary-card .change {
-            font-size: 0.85em;
-            margin-top: 5px;
-            color: #666;
-        }
-        
-        .positive {
-            color: #28a745;
-        }
-        
-        .negative {
-            color: #dc3545;
-        }
-        
-        footer {
-            background: #f8f9fa;
-            padding: 20px 30px;
-            text-align: center;
-            color: #666;
-            font-size: 0.9em;
-            border-top: 1px solid #ddd;
+
+        .header h1{font-size:clamp(1.25rem,3.2vw,2.5rem);margin-bottom:8px}
+        .header p{font-size:clamp(.9rem,1.6vw,1.05rem);opacity:.95}
+
+        /* Summary (cards) */
+        .summary-section{background:var(--muted);padding:clamp(12px,2.5vw,28px);border-top:1px solid var(--card-border)}
+        .summary-section h2{color:var(--accent);margin-bottom:clamp(8px,1.5vw,20px);font-size:clamp(1rem,2.2vw,1.4rem)}
+
+        .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+        .summary-card{background:#fff;border-left:4px solid var(--accent);padding:12px;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.04)}
+        .summary-card h3{color:var(--accent);font-size:.85rem;font-weight:600;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+        .summary-card .value{font-size:1.25rem;font-weight:700;color:var(--text)}
+        .summary-card .change{font-size:.85rem;margin-top:6px;color:#666}
+
+        /* Charts grid - responsive */
+        .charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--gap);padding:clamp(12px,2.5vw,30px)}
+
+        /* Make the 'full-width' chart center on large screens by spanning the middle column when available */
+        .chart-container.full-width{grid-column:1/-1;max-width:960px;margin:0 auto}
+
+        .chart-container{background:var(--muted);border-radius:8px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;flex-direction:column}
+        .chart-title{font-size:clamp(.88rem,1.1vw,1rem);font-weight:600;color:var(--text);margin-bottom:12px;text-align:center}
+
+        /* Ensure canvas scales nicely while preserving aspect ratio */
+        .chart-container canvas{width:100%;height:auto;aspect-ratio:16/9;display:block}
+
+        /* Footer */
+        footer{background:var(--muted);padding:12px 16px;text-align:center;color:#666;font-size:.9rem;border-top:1px solid var(--card-border)}
+
+        /* Small adjustments for very small screens */
+        @media (max-width:420px){
+            .chart-container{padding:10px}
+            .summary-card .value{font-size:1.05rem}
         }
     </style>
 </head>
