@@ -12,146 +12,127 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent: #667eea;
+            --accent-secondary: #764ba2;
+            --text: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --card-bg: #fff;
+            --border: #ddd;
+            --gap: clamp(10px, 1.5vw, 15px);
+            --padding: clamp(12px, 2vw, 20px);
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--bg-gradient);
             min-height: 100vh;
-            padding: 20px;
+            padding: clamp(8px, 1vw, 15px);
         }
         
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
         
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--bg-gradient);
             color: white;
-            padding: 40px 30px;
+            padding: clamp(15px, 2vw, 25px);
             text-align: center;
         }
         
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: clamp(1.4em, 3vw, 2em);
+            margin-bottom: 5px;
         }
         
         .header p {
-            font-size: 1.1em;
+            font-size: clamp(0.85em, 1.5vw, 0.95em);
             opacity: 0.9;
         }
         
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            padding: 30px;
-        }
-        
-        .chart-container.full-width {
-            grid-column: 2;
-        }
-        
-        @media (max-width: 1200px) {
-            .charts-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .chart-container.full-width {
-                grid-column: 1 / -1;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .chart-container.full-width {
-                grid-column: 1;
-            }
-        }
-        
-        .chart-container {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .chart-title {
-            font-size: 1.0em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
+        .loading {
             text-align: center;
+            padding: 40px;
+            color: var(--text-light);
         }
         
-        canvas {
-            display: block;
-            max-height: 300px;
+        .spinner {
+            border: 4px solid var(--bg-light);
+            border-top: 4px solid var(--accent);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px;
         }
         
         .summary-section {
-            background: #f8f9fa;
-            padding: 30px;
-            border-top: 1px solid #ddd;
+            background: var(--bg-light);
+            padding: var(--padding);
+            border-top: 1px solid var(--border);
         }
         
         .summary-section h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 1.5em;
+            color: var(--accent);
+            margin-bottom: var(--gap);
+            font-size: clamp(1.2em, 3vw, 1.5em);
         }
         
         .summary-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        
-        @media (max-width: 1024px) {
-            .summary-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .summary-grid {
-                grid-template-columns: 1fr;
-            }
+            gap: var(--gap);
         }
         
         .summary-card {
-            background: white;
-            border-left: 4px solid #667eea;
-            padding: 15px;
+            background: var(--card-bg);
+            border-left: 4px solid var(--accent);
+            padding: clamp(8px, 1.5vw, 15px);
             border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         
         .summary-card h3 {
-            color: #667eea;
-            font-size: 0.9em;
+            color: var(--accent);
+            font-size: clamp(0.7em, 0.9vw, 0.8em);
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
         
         .summary-card .value {
-            font-size: 1.5em;
+            font-size: clamp(1em, 2vw, 1.3em);
             font-weight: 700;
-            color: #333;
+            color: var(--text);
         }
         
         .summary-card .change {
-            font-size: 0.85em;
-            margin-top: 5px;
-            color: #666;
+            font-size: 0.75em;
+            margin-top: 3px;
+            color: var(--text-light);
         }
         
         .positive {
@@ -162,13 +143,71 @@
             color: #dc3545;
         }
         
-        footer {
-            background: #f8f9fa;
-            padding: 20px 30px;
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--gap);
+            padding: var(--padding);
+        }
+        
+        .chart-container {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: var(--padding);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chart-title {
+            font-size: clamp(0.8em, 1.5vw, 0.95em);
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 10px;
             text-align: center;
-            color: #666;
+        }
+        
+        .chart-wrapper {
+            flex: 1;
+            position: relative;
+            min-height: 180px;
+        }
+        
+        canvas {
+            max-height: 200px;
+        }
+        
+        @media (max-width: 1024px) {
+            .charts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                padding: var(--padding);
+            }
+        }
+        
+        footer {
+            background: var(--bg-light);
+            padding: var(--padding);
+            text-align: center;
+            color: var(--text-light);
             font-size: 0.9em;
-            border-top: 1px solid #ddd;
+            border-top: 1px solid var(--border);
         }
     </style>
 </head>
@@ -195,7 +234,7 @@
                 <div class="summary-card">
                     <h3>2026 Reserve Fund Contribution</h3>
                     <div class="value">$1,017,956</div>
-                    <div class="change"><span class="positive">+8.29%</span> vs 2025</div>
+                    <div class="change"><span class="positive">+8.25%</span> vs 2025</div>
                 </div>
                 <div class="summary-card">
                     <h3>9-Year Growth (2018-2026)</h3>
@@ -208,7 +247,7 @@
                     <div class="change">Historical Average</div>
                 </div>
                 <div class="summary-card">
-                    <h3>Latest Reserve Balance (2025)</h3>
+                    <h3>Latest Reserve Balance</h3>
                     <div class="value">$5,452,053</div>
                     <div class="change">Fund Status: Strong</div>
                 </div>
@@ -216,63 +255,68 @@
         </div>
         
         <div class="charts-grid">
-            <!-- Chart 1: Maintenance Fee Trend -->
-            <div class="chart-container">
-                <div class="chart-title">Maintenance Fee per sqft Trend</div>
-                <canvas id="maintenanceChart"></canvas>
-            </div>
-            
-            <!-- Chart 5: Year-over-Year Growth -->
             <div class="chart-container">
                 <div class="chart-title">Maintenance Fee YoY Growth %</div>
-                <canvas id="growthChart"></canvas>
+                <div class="chart-wrapper"><canvas id="growthChart"></canvas></div>
             </div>
             
-            <!-- Chart 6: Reserve Fund Balance -->
             <div class="chart-container">
-                <div class="chart-title">Closing Reserve Fund Balance</div>
-                <canvas id="reserveBalanceChart"></canvas>
+                <div class="chart-title">Maintenance Fee per sqft Trend</div>
+                <div class="chart-wrapper"><canvas id="maintenanceChart"></canvas></div>
             </div>
             
-            <!-- Chart 2: Common Expense Contribution -->
             <div class="chart-container">
-                <div class="chart-title">Common Expense Contribution</div>
-                <canvas id="expenseChart"></canvas>
+                <div class="chart-title">Reserve Fund Balance</div>
+                <div class="chart-wrapper"><canvas id="balanceChart"></canvas></div>
             </div>
             
-            <!-- Chart 4: Financial Overview -->
-            <div class="chart-container full-width">
+            <div class="chart-container">
+                <div class="chart-title">Year-over-Year Comparison (%)</div>
+                <div class="chart-wrapper"><canvas id="yoyComparisonChart"></canvas></div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-title">Financial Overview</div>
+                <div class="chart-wrapper"><canvas id="overviewChart"></canvas></div>
+            </div>
+            
+            <div class="chart-container">
                 <div class="chart-title">Budget Allocation</div>
-                <canvas id="overviewChart"></canvas>
-            </div>
-            
-            <!-- Chart 3: Reserve Fund vs Expenditures -->
-            <div class="chart-container">
-                <div class="chart-title">Budget Allocation: Reserve vs Expenditures</div>
-                <canvas id="budgetAllocationChart"></canvas>
+                <div class="chart-wrapper"><canvas id="budgetChart"></canvas></div>
             </div>
         </div>
         
         <footer>
-            <p>Generated from Budget Calendar Data | Report Date: November 2025</p>
+            <p>Condo Board Financial Report | Report Date: <span id="reportDate"></span></p>
         </footer>
     </div>
     
     <script>
-        // Chart color scheme
-        const primaryColor = 'rgb(102, 126, 234)';
-        const secondaryColor = 'rgb(118, 75, 162)';
-        const successColor = 'rgb(40, 167, 69)';
-        const dangerColor = 'rgb(220, 53, 69)';
-        
-        // Data
+        // Hard-coded data directly from Budget Cal.csv
         const years = ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'];
         const maintenanceFee = [0.57, 0.67, 0.75, 0.85, 0.88, 0.94, 1.00, 1.04, 1.10];
         const commonExpense = [1452367, 1731290, 1923613, 2193695, 2250070, 2405327, 2575619, 2677616, 2834060];
         const reserveFund = [178361, 297888, 497472, 830780, 843227, 855875, 868714, 940375, 1017956];
         const expenditures = [1232280, 1396077, 1500113, 1448719, 1449710, 1620372, 1732463, 1769516, 1849179];
-        const otherIncome = [-41726, -37325, 73972, 85804, 42867, 70920, 25558, 32275, 33075];
-        const reserveBalance = [null, null, null, null, null, 3464890, 4412465, 5452053, null];
+        const balanceData = [null, null, null, null, null, 3464890, 4412465, 5452053, null];
+        
+        // YoY percentage data (from CSV rows 9-11) - reversed to match chronological order
+        const yoyYears = ['2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'];
+        const commonExpenseYoY = [19.20, 11.11, 14.04, 2.57, 6.90, 7.08, 3.96, 5.84];
+        const reserveFundYoY = [67.01, 67.00, 67.00, 1.50, 1.50, 1.50, 8.25, 8.25];
+        const expendituresYoY = [13.29, 7.45, -3.43, 0.07, 11.77, 6.92, 2.14, 4.50];
+        
+        const primaryColor = 'rgb(102, 126, 234)';
+        const successColor = 'rgb(40, 167, 69)';
+        const dangerColor = 'rgb(220, 53, 69)';
+        const warningColor = 'rgb(255, 127, 14)';
+        
+        // Set report date
+        document.getElementById('reportDate').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
         
         // Chart 1: Maintenance Fee Trend
         new Chart(document.getElementById('maintenanceChart'), {
@@ -282,52 +326,100 @@
                 datasets: [{
                     label: 'Maintenance Fee ($/sqft)',
                     data: maintenanceFee,
-                    borderColor: primaryColor,
-                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderColor: '#0066cc',
+                    backgroundColor: 'rgba(0, 102, 204, 0.1)',
                     borderWidth: 3,
                     fill: true,
                     tension: 0.4,
                     pointRadius: 5,
-                    pointBackgroundColor: primaryColor,
+                    pointBackgroundColor: '#0066cc',
                     pointBorderColor: '#fff',
                     pointBorderWidth: 2
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { display: false } },
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.y.toFixed(2);
+                            }
+                        }
+                    }
+                },
                 scales: {
                     y: { beginAtZero: false, ticks: { callback: v => '$' + v.toFixed(2) } }
                 }
             }
         });
         
-        // Chart 2: Common Expense Contribution
-        new Chart(document.getElementById('expenseChart'), {
-            type: 'bar',
+        // Chart 2: Year-over-Year Comparison
+        new Chart(document.getElementById('yoyComparisonChart'), {
+            type: 'line',
             data: {
-                labels: years,
-                datasets: [{
-                    label: 'Common Expense ($)',
-                    data: commonExpense,
-                    backgroundColor: successColor,
-                    borderColor: 'rgba(0,0,0,0.1)',
-                    borderWidth: 1
-                }]
+                labels: yoyYears,
+                datasets: [
+                    {
+                        label: 'Common Expense',
+                        data: commonExpenseYoY,
+                        borderColor: '#0066cc',
+                        backgroundColor: 'rgba(0, 102, 204, 0.1)',
+                        borderWidth: 2.5,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        fill: false
+                    },
+                    {
+                        label: 'Reserve Fund',
+                        data: reserveFundYoY,
+                        borderColor: '#28a745',
+                        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                        borderWidth: 2.5,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        fill: false
+                    },
+                    {
+                        label: 'Expenditures',
+                        data: expendituresYoY,
+                        borderColor: '#dc3545',
+                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                        borderWidth: 2.5,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        fill: false
+                    }
+                ]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { display: false } },
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'bottom',
+                        labels: { font: { size: 11 }, padding: 8, boxWidth: 12 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + '%';
+                            }
+                        }
+                    }
+                },
                 scales: {
-                    y: { beginAtZero: true, ticks: { callback: v => '$' + (v/1e6).toFixed(1) + 'M' } }
+                    y: { 
+                        ticks: { callback: v => v.toFixed(1) + '%' }
+                    }
                 }
             }
         });
         
-        // Chart 3: Reserve Fund vs Expenditures
-        new Chart(document.getElementById('budgetAllocationChart'), {
+        // Chart 3: Budget Allocation
+        new Chart(document.getElementById('budgetChart'), {
             type: 'bar',
             data: {
                 labels: years,
@@ -335,14 +427,14 @@
                     {
                         label: 'To Reserve Fund',
                         data: reserveFund,
-                        backgroundColor: 'rgba(255, 127, 14, 0.8)',
+                        backgroundColor: '#28a745',
                         borderColor: 'rgba(0,0,0,0.1)',
                         borderWidth: 1
                     },
                     {
                         label: 'To Total Expenditures',
                         data: expenditures,
-                        backgroundColor: dangerColor,
+                        backgroundColor: '#dc3545',
                         borderColor: 'rgba(0,0,0,0.1)',
                         borderWidth: 1
                     }
@@ -350,43 +442,82 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'bottom' } },
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'bottom',
+                        labels: { font: { size: 11 }, padding: 8, boxWidth: 12 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': $' + (context.parsed.y/1e6).toFixed(1) + 'M';
+                            }
+                        }
+                    }
+                },
                 scales: {
-                    y: { stacked: false, ticks: { callback: v => '$' + (v/1e6).toFixed(1) + 'M' } }
+                    y: { ticks: { callback: v => '$' + (v/1e6).toFixed(1) + 'M' } }
                 }
             }
         });
         
-        // Chart 4: Financial Overview (in millions)
+        // Chart 4: Financial Overview
         new Chart(document.getElementById('overviewChart'), {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: years,
                 datasets: [
                     {
+                        label: 'Common Expense',
+                        data: commonExpense.map(v => v/1e6),
+                        borderColor: '#0066cc',
+                        backgroundColor: 'rgba(0, 102, 204, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: false,
+                        pointRadius: 4
+                    },
+                    {
                         label: 'Reserve Fund',
                         data: reserveFund.map(v => v/1e6),
-                        backgroundColor: 'rgb(255, 127, 14)',
-                        borderColor: 'rgba(0,0,0,0.1)',
-                        borderWidth: 1
+                        borderColor: '#28a745',
+                        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: false,
+                        pointRadius: 4
                     },
                     {
                         label: 'Expenditures',
                         data: expenditures.map(v => v/1e6),
-                        backgroundColor: dangerColor,
-                        borderColor: 'rgba(0,0,0,0.1)',
-                        borderWidth: 1
+                        borderColor: '#dc3545',
+                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: false,
+                        pointRadius: 4
                     }
                 ]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { display: false } },
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { 
+                        position: 'bottom',
+                        labels: { font: { size: 11 }, padding: 8, boxWidth: 12 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': $' + context.parsed.y.toFixed(1) + 'M';
+                            }
+                        }
+                    }
+                },
                 scales: {
-                    x: { stacked: true },
-                    y: { stacked: true, ticks: { callback: v => '$' + v.toFixed(1) + 'M' } }
+                    y: { ticks: { callback: v => '$' + v.toFixed(1) + 'M' } }
                 }
             }
         });
@@ -403,46 +534,58 @@
             data: {
                 labels: years.slice(1),
                 datasets: [{
-                    label: 'YoY Growth %',
+                    label: 'Maintenance Fee YoY Growth %',
                     data: yoyGrowth,
-                    borderColor: primaryColor,
-                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderColor: '#0066cc',
+                    backgroundColor: 'rgba(0, 102, 204, 0.1)',
                     borderWidth: 3,
                     fill: true,
                     tension: 0.4,
                     pointRadius: 5,
-                    pointBackgroundColor: primaryColor,
+                    pointBackgroundColor: '#0066cc',
                     pointBorderColor: '#fff',
                     pointBorderWidth: 2
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { display: false } },
-                scales: { y: { ticks: { callback: v => v.toFixed(1) + '%' } } }
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: { ticks: { callback: v => v.toFixed(1) + '%' } }
+                }
             }
         });
         
         // Chart 6: Reserve Balance
+        const balanceDataClean = balanceData.filter(v => v !== null);
         const balanceYears = ['2023', '2024', '2025'];
-        const balanceData = [3464890, 4412465, 5452053];
         
-        new Chart(document.getElementById('reserveBalanceChart'), {
+        new Chart(document.getElementById('balanceChart'), {
             type: 'bar',
             data: {
                 labels: balanceYears,
                 datasets: [{
                     label: 'Reserve Fund Balance ($)',
-                    data: balanceData,
-                    backgroundColor: primaryColor,
-                    borderColor: 'rgba(0,0,0,0.1)',
-                    borderWidth: 1
+                    data: balanceDataClean,
+                    backgroundColor: '#1a5f2f',
+                    borderColor: '#1a5f2f',
+                    borderWidth: 0,
+                    barThickness: 20
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: { display: false },
                     tooltip: {
@@ -453,7 +596,12 @@
                         }
                     }
                 },
-                scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + (v/1e6).toFixed(1) + 'M' } } }
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: v => '$' + (v/1e6).toFixed(1) + 'M' }
+                    }
+                }
             }
         });
     </script>
